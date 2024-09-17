@@ -1,0 +1,11 @@
+<h1>All our movies</h1>
+<ul>
+  <% @movies.each do |movie| %>
+    <li><%= link_to movie.title, movie_path(movie) %> rating: <%= movie.rating %>
+      <br>
+      - directed by: <%= movie.director %>
+    </li>
+    <br>
+    <br>
+  <% end %>
+</ul>

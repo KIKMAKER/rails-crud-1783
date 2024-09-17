@@ -1,0 +1,11 @@
+<h1><%= @movie.title %></h1>
+<p>This movie was directed by <%= @movie.director %></p>
+
+<p>You rated it <%= @movie.rating %></p>
+
+
+<%= link_to "edit this movie", edit_movie_path(@movie) %>
+<br>
+<%= link_to "delete this movie", movie_path(@movie), data: {turbo_method: :delete, turbo_confirm: "Are you for sure?"} %>
+<br>
+<%= link_to "all movies", movies_path %>
