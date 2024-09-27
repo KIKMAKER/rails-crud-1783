@@ -1,11 +1,13 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, except [:index, :new, :create]
+  before_action :set_movie, except: [:index, :new, :create, :top_rated]
   def index
-    @movies = Movie.all
+    @movies = policy_scope(Movie)
   end
 
   def show
-
+    # set movie before action
+    authorize @movie
+    @review = Review.new
   end
 
   def new
@@ -37,6 +39,15 @@ class MoviesController < ApplicationController
   def destroy
     @movie.delete
     redirect_to movies_path
+  end
+
+  def top_rated
+    @movies = Movie.where(rating: 10)
+  end
+
+  def director
+    # @movie = Movie.find(params[:id])
+    @director = @movie.director
   end
 
   private

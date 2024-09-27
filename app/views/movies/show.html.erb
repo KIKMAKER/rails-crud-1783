@@ -1,9 +1,24 @@
 <h1><%= @movie.title %></h1>
 <p>This movie was directed by <%= @movie.director %></p>
-
-<p>You rated it <%= @movie.rating %></p>
-
-
+<p>Viewers rated it <%= @movie.rating %></p>
+<h2>Reviews</h2>
+<ul>
+  <% @movie.reviews.each do |review| %>
+    <li><%= review.content %></li>
+    <%= policy(review).destroy? %>
+    <% if policy(review).destroy? %>
+    <%# if @review.user == current_user %>
+      <%= link_to review_path(review), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+        <i class="fa-solid fa-trash"></i>
+      <% end %>
+    <% end %>
+  <% end %>
+</ul>
+<h2>Add a review:</h2>
+<%= simple_form_for [@movie, @review] do |f| %>
+  <%= f.input :content %>
+  <%= f.submit %>
+<% end %>
 <%= link_to "edit this movie", edit_movie_path(@movie) %>
 <br>
 <%= link_to "delete this movie", movie_path(@movie), data: {turbo_method: :delete, turbo_confirm: "Are you for sure?"} %>

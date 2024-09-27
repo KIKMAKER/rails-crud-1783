@@ -1,4 +1,4 @@
-<h1>All our movies</h1>
+<h1>Movies with 10 stars</h1>
 <ul>
   <% @movies.each do |movie| %>
     <li><%= link_to movie.title, movie_path(movie) %> rating: <%= movie.rating %>
@@ -10,4 +10,3 @@
   <% end %>
 </ul>
 
-<%= link_to "top movies",  top_rated_movies_path, class: "btn-purple"  %>
